@@ -67,6 +67,21 @@ usernameDisplay.textContent = userName;
 currentLevelDisplay.textContent = level;
 updateProgress();
 
+const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+
+    if (msg === "login") {
+        alert("✅ Login successful! Welcome back 🎮");
+    }
+
+    if (msg === "registered") {
+        alert("🎉 Registration successful! Welcome to Simon Says 🎮");
+    }
+
+
+
+
+
 // Get player name (simple implementation)
 function getPlayerName() {
     if (isLoggedIn) return; // Don't ask for name if logged in

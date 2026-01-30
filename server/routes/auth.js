@@ -9,6 +9,10 @@ router.post("/signup", async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        if (!username || !password) {
+            return res.send("Username and password required");
+        }
+
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.send("User already exists");
@@ -16,13 +20,23 @@ router.post("/signup", async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await User.create({
+        const user = await User.create({
             username,
-            password: hashedPassword
+            password: hashedPassword,
+            highScore: 0
         });
 
-        res.redirect("/login.html");
+        // ✅ AUTO LOGIN AFTER REGISTER
+        req.session.user = {
+            _id: user._id,
+            username: user.username
+        };
+
+        // redirect to game with success message
+        res.redirect("/game.html?msg=registered");
+
     } catch (err) {
+        console.error("Signup Error:", err);
         res.status(500).send("Signup error");
     }
 });
@@ -31,6 +45,10 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.send("Username and password required");
+        }
 
         const user = await User.findOne({ username });
         if (!user) {
@@ -47,8 +65,11 @@ router.post("/login", async (req, res) => {
             username: user.username
         };
 
-        res.redirect("/game.html");
+        // redirect with login success message
+        res.redirect("/game.html?msg=login");
+
     } catch (err) {
+        console.error("Login Error:", err);
         res.status(500).send("Login error");
     }
 });
@@ -60,6 +81,7 @@ router.get("/user", async (req, res) => {
     }
 
     const user = await User.findById(req.session.user._id);
+
     res.json({
         username: user.username,
         highScore: user.highScore
@@ -83,7 +105,7 @@ router.post("/score", async (req, res) => {
     res.send("Score saved");
 });
 
-/* ================= LOGOUT (OPTIONAL) ================= */
+/* ================= LOGOUT ================= */
 router.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.redirect("/login.html");
