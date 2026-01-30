@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says - Memory Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gamestyle.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-brain"></i>
+            <h1>SIMON SAYS</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#game-section">Play Game</a></li>
+                <li><a href="#instructions">How to Play</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Test Your Memory with Simon Says</h2>
+                <p>Follow the pattern of lights and sounds for as long as you can. Each level adds one more step to the sequence. How far can you go?</p>
+            </div>
+        </section>
+
+        <!-- Main Game Section -->
+        <section class="main-game-section" id="game-section">
+            <!-- Game Info Card (Left Half) -->
+            <div class="game-info-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-gamepad"></i> Game Information</h3>
+                </div>
+                
+                <div class="player-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Player</h4>
+                            <p id="username">Guest Player</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>High Score</h4>
+                            <p id="highScore">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Current Level</h4>
+                            <p id="currentLevel">1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="fas fa-list-ol"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Sequence Length</h4>
+                            <p id="sequenceLength">1</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="game-progress">
+                    <div class="progress-info">
+                        <h4>Game Progress</h4>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                 <div class="game-status">
+                    <div class="status-header">
+                        <i class="fas fa-bullhorn"></i>
+                        <h4>Game Status</h4>
+                    </div>
+                    <div class="status-message" id="gameMessage">
+                        Press START to begin the game!
+                    </div>
+                </div>
+              
+                 <div class="keyboard-help">
+                    <h4><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h4>
+                    <div class="key-list">
+                        <div class="key-item">
+                            <span class="key">1</span>
+                            <span class="key-label">Red Button</span>
+                        </div>
+                        <div class="key-item">
+                            <span class="key">2</span>
+                            <span class="key-label">Yellow Button</span>
+                        </div>
+                        <div class="key-item">
+                            <span class="key">3</span>
+                            <span class="key-label">Blue Button</span>
+                        </div>
+                        <div class="key-item">
+                            <span class="key">4</span>
+                            <span class="key-label">Green Button</span>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+            <!-- Game Container Card (Right Half) -->
+            <div class="game-container-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-play-circle"></i> Game Board</h3>
+                </div>
+                
+                <div class="game-container">
+                    <div class="btn-container">
+                        <div class="line-1">
+                            <div class="btn red" id="red" data-sound="1">
+                                <i class="fas fa-lightbulb"></i>
+                                <span class="btn-label">1</span>
+                            </div>
+                            <div class="btn yellow" id="yellow" data-sound="2">
+                                <i class="fas fa-lightbulb"></i>
+                                <span class="btn-label">2</span>
+                            </div>
+                        </div>
+                        <div class="line-2">
+                            <div class="btn blue" id="blue" data-sound="3">
+                                <i class="fas fa-lightbulb"></i>
+                                <span class="btn-label">3</span>
+                            </div>
+                            <div class="btn green" id="green" data-sound="4">
+                                <i class="fas fa-lightbulb"></i>
+                                <span class="btn-label">4</span>
+                            </div>
+                        </div>
+                    </div>
+
+                      <div class="game-controls">
+                    <button class="btn-start" id="startBtn">
+                        <i class="fas fa-play-circle"></i> Start Game
+                    </button>
+                    <button class="btn-reset" id="resetBtn">
+                        <i class="fas fa-redo"></i> Reset Game
+                    </button>
+                </div>
+
+                
+                    
+                    <div class="game-instructions">
+                        <h4><i class="fas fa-info-circle"></i> Quick Instructions</h4>
+                        <ul>
+                            <li>Watch the sequence Simon shows you</li>
+                            <li>Click the buttons in the same order</li>
+                            <li>Each correct sequence advances you to next level</li>
+                            <li>One mistake and the game is over!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions Section -->
+        <section class="instructions" id="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Play Simon Says</h3>
+            <ul>
+                <li>Press the START button to begin the game.</li>
+                <li>Watch and memorize the sequence of lights that Simon shows.</li>
+                <li>Repeat the sequence by clicking the colored buttons in the same order.</li>
+                <li>Each level adds one more step to the sequence.</li>
+                <li>If you make a mistake, the game ends and your score is recorded.</li>
+                <li>Try to beat your high score by reaching the highest level possible!</li>
+                <li>You can reset the game anytime with the RESET button.</li>
+                <li>Use keyboard keys 1-4 as shortcuts for the colored buttons.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer id="about">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>SIMON SAYS</h2>
+                <p>A classic memory game that challenges your ability to remember sequences of colors and sounds. Originally created in 1978, Simon has been entertaining and testing memories for decades.</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Simon Says Memory Game. All rights reserved. | Designed for educational purposes</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

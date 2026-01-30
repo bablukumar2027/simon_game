@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Simon Says Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1><i class="fas fa-gamepad"></i> Simon Says</h1>
+            <p class="tagline">Test your memory with the classic game</p>
+        </div>
+        
+        <div class="main-content">
+            <!-- Login Section -->
+            <div class="form-section">
+                <div class="form-card">
+                    <div class="form-title">
+                        <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+                        <p>Enter your credentials to access the game</p>
+                    </div>
+                    
+                    <!-- Error Message Display -->
+                    <div class="error-message" id="login-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Invalid username or password</span>
+                    </div>
+                    
+                    <form action="/login" method="post" class="auth-form">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="username" placeholder="Username" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" placeholder="Password" required>
+                            <span class="toggle-password" id="toggle-login-password">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox" name="remember">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-login">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+                    
+                    <div class="demo-credentials">
+                        <h4><i class="fas fa-key"></i> Demo Credentials</h4>
+                        <p>Username: <strong>player1</strong></p>
+                        <p>Password: <strong>simon123</strong></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="divider-vertical">
+                <span>OR</span>
+            </div>
+            
+            <!-- Signup Section -->
+            <div class="form-section">
+                <div class="form-card">
+                    <div class="form-title">
+                        <h2><i class="fas fa-user-plus"></i> Sign Up</h2>
+                        <p>Create a new account to start playing</p>
+                    </div>
+                    
+                    <!-- Error Message Display -->
+                    <div class="error-message" id="signup-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="signup-error-text">Username already exists</span>
+                    </div>
+                    
+                    <form action="/signup" method="post" class="auth-form">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="username" placeholder="Choose a username" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" id="signup-password" placeholder="Create password" required>
+                            <span class="toggle-password" id="toggle-signup-password">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                        
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="confirm-password" placeholder="Confirm password" required>
+                        </div>
+                        
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="password-strength"></div>
+                            </div>
+                            <p class="strength-text" id="strength-text">Password strength: Weak</p>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox" name="terms" required>
+                                <span>I agree to the <a href="#" class="terms-link">Terms & Conditions</a></span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-signup">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="password-rules">
+                        <h4><i class="fas fa-shield-alt"></i> Password Requirements</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> At least 8 characters</li>
+                            <li><i class="fas fa-check"></i> One uppercase letter</li>
+                            <li><i class="fas fa-check"></i> One number</li>
+                            <li><i class="fas fa-check"></i> One special character</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-info">
+            <div class="info-box">
+                <i class="fas fa-brain"></i>
+                <h3>Memory Challenge</h3>
+                <p>Improve your memory with increasing sequence lengths</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-trophy"></i>
+                <h3>High Scores</h3>
+                <p>Compete with players worldwide</p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-music"></i>
+                <h3>Sound Effects</h3>
+                <p>Engaging audio for better gameplay</p>
+            </div>
+        </div>
+        
+        <div class="simon-colors">
+            <div class="color-circle red" data-sound="C"></div>
+            <div class="color-circle blue" data-sound="E"></div>
+            <div class="color-circle green" data-sound="G"></div>
+            <div class="color-circle yellow" data-sound="A"></div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Simon Says Game. Challenge your memory!</p>
+            <p class="footer-links">
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a> | 
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a> | 
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Toggle password visibility
+        document.getElementById('toggle-login-password').addEventListener('click', function() {
+            const passwordInput = document.querySelector('input[name="password"]');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        document.getElementById('toggle-signup-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('signup-password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Password strength checker
+        const passwordInput = document.getElementById('signup-password');
+        const strengthBar = document.getElementById('password-strength');
+        const strengthText = document.getElementById('strength-text');
+        
+        passwordInput.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            // Length check
+            if (password.length >= 8) strength += 25;
+            if (password.length >= 12) strength += 10;
+            
+            // Complexity checks
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+            
+            // Cap at 100
+            strength = Math.min(strength, 100);
+            
+            // Update UI
+            strengthBar.style.width = strength + '%';
+            
+            if (strength < 40) {
+                strengthBar.style.backgroundColor = '#ff4757';
+                strengthText.textContent = 'Password strength: Weak';
+            } else if (strength < 70) {
+                strengthBar.style.backgroundColor = '#ffa502';
+                strengthText.textContent = 'Password strength: Medium';
+            } else {
+                strengthBar.style.backgroundColor = '#2ed573';
+                strengthText.textContent = 'Password strength: Strong';
+            }
+        });
+        
+        // Simulate login error for demonstration
+        // Remove this in production
+        document.querySelector('.btn-login').addEventListener('click', function(e) {
+            // This is just for demo - remove in your actual implementation
+            // Show error message for demo
+            document.getElementById('login-error').style.display = 'flex';
+            
+            // If you want to actually submit the form, remove the line below
+            // e.preventDefault(); // Comment this out for real form submission
+        });
+        
+        // Simulate signup error for demonstration
+        // Remove this in production
+        document.querySelector('.btn-signup').addEventListener('click', function(e) {
+            // This is just for demo - remove in your actual implementation
+            // Show error message for demo
+            document.getElementById('signup-error').style.display = 'flex';
+            
+            // If you want to actually submit the form, remove the line below
+            // e.preventDefault(); // Comment this out for real form submission
+        });
+        
+        // Hide errors when user starts typing
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.closest('.form-card').querySelector('.error-message')) {
+                    this.closest('.form-card').querySelector('.error-message').style.display = 'none';
+                }
+            });
+        });
+        
+        // Simon color animation
+        const colors = document.querySelectorAll('.color-circle');
+        colors.forEach(color => {
+            color.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            
+            color.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
